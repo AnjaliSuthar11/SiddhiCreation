@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {  creationProjects } from "@/data/site";
 import { Reveal } from "@/components/Reveal";
@@ -8,7 +8,6 @@ import {
   clients,
   images,
   MATERIALS,
-  materials,
   processSteps,
   projectCategories,
   projects,
@@ -66,102 +65,6 @@ function Index() {
             p.tags.includes(filter) ||
             p.category === filter
         );
-
-  /* =====================================================
-     TESTIMONIAL
-  ===================================================== */
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // ================= ANIMATION DIRECTION =================
-
-const [direction, setDirection] = useState(1);
-const [isTestimonialHovered, setIsTestimonialHovered] =
-  useState(false);
-
-// ================= AUTOMATIC TESTIMONIAL =================
-
-useEffect(() => {
-  if (!testimonials || testimonials.length <= 1) return;
-
-  if (isTestimonialHovered) return;
-
-  const timer = setInterval(() => {
-    setDirection(1);
-
-    setActiveIndex((prev) => {
-      return (prev + 1) % testimonials.length;
-    });
-  }, 1500);
-
-  return () => clearInterval(timer);
-}, [isTestimonialHovered]);
-
-if (!testimonials || testimonials.length === 0) {
-  return null;
-}
-
-  // ================= TESTIMONIAL INDEXES =================
-
-  const previousIndex =
-    (activeIndex - 1 + testimonials.length) %
-    testimonials.length;
-
-  const nextIndex =
-    (activeIndex + 1) %
-    testimonials.length;
-
-  const previousTestimonial =
-    testimonials[previousIndex]!;
-
-  const activeTestimonial =
-    testimonials[activeIndex]!;
-
-  const nextTestimonial =
-    testimonials[nextIndex]!;
-
-  // ================= SMOOTH NEXT =================
-
-  const handleNext = () => {
-    setDirection(1);
-
-    setActiveIndex((prev) => {
-      return (prev + 1) % testimonials.length;
-    });
-  };
-
-  // ================= SMOOTH PREVIOUS =================
-
-  const handlePrevious = () => {
-    setDirection(-1);
-
-    setActiveIndex((prev) => {
-      return (
-        (prev - 1 + testimonials.length) %
-        testimonials.length
-      );
-    });
-  };
-
-  // ================= VISIBLE CARDS =================
-
-  const visibleTestimonials = [
-    {
-      index: previousIndex,
-      testimonial: previousTestimonial,
-      position: "left",
-    },
-    {
-      index: activeIndex,
-      testimonial: activeTestimonial,
-      position: "center",
-    },
-    {
-      index: nextIndex,
-      testimonial: nextTestimonial,
-      position: "right",
-    },
-  ];
 
   /* =====================================================
      CREATION VIDEOS
