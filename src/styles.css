@@ -8,6 +8,42 @@
  * Siddhi On Creation — premium architectural art design system.
  * Charcoal / warm white / stone / subtle metallic gold.
  */
+/* =========================================
+   TESTIMONIAL TRAIN
+========================================= */
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  animation: testimonial-train 24s linear infinite;
+  will-change: transform;
+}
+
+.testimonial-track:hover {
+  animation-play-state: paused;
+}
+
+
+/* Continuous train movement */
+
+@keyframes testimonial-train {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+
+/* Respect reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-track {
+    animation: none;
+  }
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {  creationProjects } from "@/data/site";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -22,7 +22,8 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Siddhi On Creation — Custom Sculptures, Murals & Architectural Art",
+        title:
+          "Siddhi On Creation — Custom Sculptures, Murals & Architectural Art",
       },
       {
         name: "description",
@@ -31,7 +32,8 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Siddhi On Creation — Custom Sculptures, Murals & Architectural Art",
+        content:
+          "Siddhi On Creation — Custom Sculptures, Murals & Architectural Art",
       },
       {
         property: "og:description",
@@ -44,20 +46,60 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  /* =====================================================
+     VIDEO STATE
+  ===================================================== */
+
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
+
+  /* =====================================================
+     PROJECT FILTER
+  ===================================================== */
+
   const [filter, setFilter] = useState<string>("All Projects");
+
   const filtered =
     filter === "All Projects"
       ? projects
-      : projects.filter((p) => p.tags.includes(filter) || p.category === filter);
-// tetsimonal
- const [activeIndex, setActiveIndex] = useState(0);
+      : projects.filter(
+          (p) =>
+            p.tags.includes(filter) ||
+            p.category === filter
+        );
+
+  /* =====================================================
+     TESTIMONIAL
+  ===================================================== */
+
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // ================= ANIMATION DIRECTION =================
-  const [direction, setDirection] = useState(1);
 
-  if (!testimonials || testimonials.length === 0) {
-    return null;
-  }
+const [direction, setDirection] = useState(1);
+const [isTestimonialHovered, setIsTestimonialHovered] =
+  useState(false);
+
+// ================= AUTOMATIC TESTIMONIAL =================
+
+useEffect(() => {
+  if (!testimonials || testimonials.length <= 1) return;
+
+  if (isTestimonialHovered) return;
+
+  const timer = setInterval(() => {
+    setDirection(1);
+
+    setActiveIndex((prev) => {
+      return (prev + 1) % testimonials.length;
+    });
+  }, 1500);
+
+  return () => clearInterval(timer);
+}, [isTestimonialHovered]);
+
+if (!testimonials || testimonials.length === 0) {
+  return null;
+}
 
   // ================= TESTIMONIAL INDEXES =================
 
@@ -69,9 +111,14 @@ function Index() {
     (activeIndex + 1) %
     testimonials.length;
 
-  const previousTestimonial = testimonials[previousIndex]!;
-  const activeTestimonial = testimonials[activeIndex]!;
-  const nextTestimonial = testimonials[nextIndex]!;
+  const previousTestimonial =
+    testimonials[previousIndex]!;
+
+  const activeTestimonial =
+    testimonials[activeIndex]!;
+
+  const nextTestimonial =
+    testimonials[nextIndex]!;
 
   // ================= SMOOTH NEXT =================
 
@@ -97,9 +144,6 @@ function Index() {
   };
 
   // ================= VISIBLE CARDS =================
-  // These are the 3 cards currently visible.
-  // Keeping their actual IDs allows Framer Motion
-  // to move the SAME card from one position to another.
 
   const visibleTestimonials = [
     {
@@ -118,6 +162,145 @@ function Index() {
       position: "right",
     },
   ];
+
+  /* =====================================================
+     CREATION VIDEOS
+  ===================================================== */
+
+  const videos = [
+    {
+      src: "/influence/Final.mp4",
+      number: "01",
+      category: "Sculpture",
+      title: "Sculptural Art",
+    },
+    {
+      src: "/influence/Final2.mp4",
+      number: "02",
+      category: "Murals",
+      title: "Wall Art",
+    },
+    {
+      src: "/influence/Final3.mp4",
+      number: "03",
+      category: "Metalwork",
+      title: "Gates & Jali",
+    },
+    {
+      src: "/influence/Final2.mp4",
+      number: "04",
+      category: "CNC & Design",
+      title: "Precision Art",
+    },
+  ];
+
+  /* =====================================================
+     PREVENT PAGE SCROLL WHEN VIDEO IS OPEN
+  ===================================================== */
+
+  useEffect(() => {
+    if (activeVideo !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeVideo]);
+
+  /* =====================================================
+     KEYBOARD NAVIGATION
+  ===================================================== */
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeVideo === null) return;
+
+      // Close
+      if (e.key === "Escape") {
+        setActiveVideo(null);
+        return;
+      }
+
+      // Next
+      if (e.key === "ArrowRight") {
+        setActiveVideo(
+          (activeVideo + 1) % videos.length
+        );
+        return;
+      }
+
+      // Previous
+      if (e.key === "ArrowLeft") {
+        setActiveVideo(
+          (activeVideo - 1 + videos.length) %
+            videos.length
+        );
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [activeVideo]);
+
+  /* =====================================================
+     NEXT VIDEO
+  ===================================================== */
+
+  const nextVideo = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+
+    setActiveVideo((current) => {
+      if (current === null) return null;
+
+      return (current + 1) % videos.length;
+    });
+  };
+
+  /* =====================================================
+     PREVIOUS VIDEO
+  ===================================================== */
+
+  const previousVideo = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+
+    setActiveVideo((current) => {
+      if (current === null) return null;
+
+      return (
+        (current - 1 + videos.length) %
+        videos.length
+      );
+    });
+  };
+
+  /* =====================================================
+     CLOSE VIDEO
+  ===================================================== */
+
+  const closeVideo = () => {
+    setActiveVideo(null);
+  };
+
+  /* =====================================================
+     RETURN
+  ===================================================== */
+
   return (
     <div>
       {/*image Hero */}
@@ -408,12 +591,13 @@ function Index() {
 
     <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
-
       {/* ================= 01 SCULPTURE ================= */}
 
       <Reveal delay={0}>
-
-        <div className="group relative overflow-hidden bg-[#241c16]">
+        <div
+          onClick={() => setActiveVideo(0)}
+          className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
+        >
 
           <div className="aspect-[9/16]">
 
@@ -428,19 +612,14 @@ function Index() {
 
           </div>
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
 
-          {/* Number */}
           <div className="absolute left-5 top-5">
-
             <span className="font-display text-3xl text-white/70">
               01
             </span>
-
           </div>
 
-          {/* Text */}
           <div className="absolute bottom-0 left-0 w-full p-6">
 
             <p className="text-[0.6rem] tracking-[0.25em] text-[#d4a85c] uppercase">
@@ -454,107 +633,16 @@ function Index() {
           </div>
 
         </div>
-
       </Reveal>
 
 
       {/* ================= 02 MURAL ================= */}
 
       <Reveal delay={80}>
-
-        <div className="group relative overflow-hidden bg-[#241c16]">
-
-          <div className="aspect-[9/16]">
-{/* aspect ratio 3/4 */}
-            <video
-              src="/work4.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-            />
-
-          </div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-
-          <div className="absolute left-5 top-5">
-
-            <span className="font-display text-3xl text-white/70">
-              02
-            </span>
-
-          </div>
-
-          <div className="absolute bottom-0 left-0 w-full p-6">
-
-            <p className="text-[0.6rem] tracking-[0.25em] text-[#d4a85c] uppercase">
-              Murals
-            </p>
-
-            <h3 className="mt-2 font-display text-2xl text-white">
-              Wall Art
-            </h3>
-
-          </div>
-
-        </div>
-
-      </Reveal>
-
-
-      {/* ================= 03 METALWORK ================= */}
-
-      <Reveal delay={160}>
-
-        <div className="group relative overflow-hidden bg-[#241c16]">
-
-          <div className="aspect-[9/16]">
-
-            <video
-              src="/work5.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-            />
-
-          </div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-
-          <div className="absolute left-5 top-5">
-
-            <span className="font-display text-3xl text-white/70">
-              03
-            </span>
-
-          </div>
-
-          <div className="absolute bottom-0 left-0 w-full p-6">
-
-            <p className="text-[0.6rem] tracking-[0.25em] text-[#d4a85c] uppercase">
-              Metalwork
-            </p>
-
-            <h3 className="mt-2 font-display text-2xl text-white">
-              Gates & Jali
-            </h3>
-
-          </div>
-
-        </div>
-
-      </Reveal>
-
-
-      {/* ================= 04 CNC ================= */}
-
-      <Reveal delay={240}>
-
-        <div className="group relative overflow-hidden bg-[#241c16]">
+        <div
+          onClick={() => setActiveVideo(1)}
+          className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
+        >
 
           <div className="aspect-[9/16]">
 
@@ -572,11 +660,99 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
 
           <div className="absolute left-5 top-5">
+            <span className="font-display text-3xl text-white/70">
+              02
+            </span>
+          </div>
 
+          <div className="absolute bottom-0 left-0 w-full p-6">
+
+            <p className="text-[0.6rem] tracking-[0.25em] text-[#d4a85c] uppercase">
+              Murals
+            </p>
+
+            <h3 className="mt-2 font-display text-2xl text-white">
+              FRP Art
+            </h3>
+
+          </div>
+
+        </div>
+      </Reveal>
+
+
+      {/* ================= 03 METALWORK ================= */}
+
+      <Reveal delay={160}>
+        <div
+          onClick={() => setActiveVideo(2)}
+          className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
+        >
+
+          <div className="aspect-[9/16]">
+
+            <video
+              src="/influence/Final3.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+            />
+
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+
+          <div className="absolute left-5 top-5">
+            <span className="font-display text-3xl text-white/70">
+              03
+            </span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 w-full p-6">
+
+            <p className="text-[0.6rem] tracking-[0.25em] text-[#d4a85c] uppercase">
+              Metalwork
+            </p>
+
+            <h3 className="mt-2 font-display text-2xl text-white">
+            FRP Art
+            </h3>
+
+          </div>
+
+        </div>
+      </Reveal>
+
+
+      {/* ================= 04 CNC ================= */}
+
+      <Reveal delay={240}>
+        <div
+          onClick={() => setActiveVideo(3)}
+          className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
+        >
+
+          <div className="aspect-[9/16]">
+
+            <video
+              src="/influence/Final2.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+            />
+
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+
+          <div className="absolute left-5 top-5">
             <span className="font-display text-3xl text-white/70">
               04
             </span>
-
           </div>
 
           <div className="absolute bottom-0 left-0 w-full p-6">
@@ -592,7 +768,6 @@ function Index() {
           </div>
 
         </div>
-
       </Reveal>
 
     </div>
@@ -622,6 +797,77 @@ function Index() {
   </div>
 
 </section>
+
+
+{/* ========================================================= */}
+{/* ================= FULLSCREEN VIDEO VIEWER =============== */}
+{/* ========================================================= */}
+
+{activeVideo !== null && (
+
+  <div
+    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-md"
+    onClick={closeVideo}
+  >
+
+    {/* LEFT ARROW */}
+
+    <button
+      type="button"
+      onClick={previousVideo}
+      aria-label="Previous video"
+      className="absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-light text-white transition-opacity hover:opacity-60 sm:left-8"
+    >
+      ‹
+    </button>
+
+
+    {/* VIDEO */}
+
+    <div
+      className="relative flex h-[90vh] max-h-[900px] w-auto max-w-[90vw] items-center justify-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+      <video
+        key={activeVideo}
+        src={videos[activeVideo]?.src}
+        autoPlay
+        playsInline
+        muted={false}
+        controls={false}
+        className="h-full max-h-[90vh] w-auto max-w-[90vw] object-contain"
+      />
+
+    </div>
+
+
+    {/* RIGHT ARROW */}
+
+    <button
+      type="button"
+      onClick={nextVideo}
+      aria-label="Next video"
+      className="absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center text-4xl font-light text-white transition-opacity hover:opacity-60 sm:right-8"
+    >
+      ›
+    </button>
+
+
+    {/* CLOSE */}
+
+    <button
+      type="button"
+      onClick={closeVideo}
+      aria-label="Close video"
+      className="absolute right-5 top-5 z-20 flex h-10 w-10 items-center justify-center text-3xl font-light text-white transition-opacity hover:opacity-60 sm:right-8 sm:top-8"
+    >
+      ×
+    </button>
+
+  </div>
+
+)}
 
       {/* About */}
       <section className="mx-auto grid max-w-[1400px] items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-2 lg:py-32">
@@ -971,466 +1217,365 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-         <section className="overflow-hidden border-y border-border bg-secondary py-20">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-
-          {/* ================= HEADING + NAVIGATION ================= */}
-
-          <div className="flex items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="Testimonials"
-              title="In their words"
-            />
-
-            <div className="flex gap-2">
-
-              {/* PREVIOUS BUTTON */}
-
-              <button
-                onClick={handlePrevious}
-                className="flex h-11 w-11 items-center justify-center border border-border bg-background transition-all duration-300 hover:bg-foreground hover:text-background"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={18} />
-              </button>
-
-              {/* NEXT BUTTON */}
-
-              <button
-                onClick={handleNext}
-                className="flex h-11 w-11 items-center justify-center border border-border bg-background transition-all duration-300 hover:bg-foreground hover:text-background"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={18} />
-              </button>
-
-            </div>
-          </div>
-
-
-          {/* ===================================================== */}
-          {/* SMOOTH TRAIN TESTIMONIAL CAROUSEL */}
-          {/* ===================================================== */}
-
-          <div className="mt-12">
-
-            {/* Desktop Layout */}
-
-            <div className="hidden min-h-[400px] items-center gap-4 md:grid md:grid-cols-[0.8fr_1.4fr_0.8fr] lg:gap-6">
-
-              <AnimatePresence initial={false} mode="popLayout">
-
-                {visibleTestimonials.map(
-                  ({ index, testimonial, position }) => {
-
-                    const isCenter = position === "center";
-
-                    return (
-                      <motion.div
-                        key={index}
-                        layout
-                        initial={{
-                          opacity: 0,
-                          x:
-                            position === "left"
-                              ? direction === -1
-                                ? -120
-                                : -60
-                              : position === "right"
-                                ? direction === 1
-                                  ? 120
-                                  : 60
-                                : direction === 1
-                                  ? 100
-                                  : -100,
-                          scale: 0.92,
-                        }}
-                        animate={{
-                          opacity: isCenter ? 1 : 0.7,
-                          x: 0,
-                          scale: 1,
-                        }}
-                        exit={{
-                          opacity: 0,
-                          x:
-                            direction === 1
-                              ? -160
-                              : 160,
-                          scale: 0.9,
-                        }}
-                        transition={{
-                          layout: {
-                            duration: 0.85,
-                            ease: [0.22, 1, 0.36, 1],
-                          },
-                          opacity: {
-                            duration: 0.45,
-                          },
-                          x: {
-                            duration: 0.85,
-                            ease: [0.22, 1, 0.36, 1],
-                          },
-                          scale: {
-                            duration: 0.85,
-                            ease: [0.22, 1, 0.36, 1],
-                          },
-                        }}
-                        className={`group relative flex flex-col overflow-hidden border border-border bg-background ${
-                          isCenter
-                            ? "z-10 h-[380px] p-7 shadow-lg"
-                            : "h-[300px] p-5"
-                        }`}
-                      >
-
-                        {/* ================= GRID BACKGROUND ================= */}
-
-                        <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
-
-                          <div
-                            className={`h-full w-full bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] ${
-                              isCenter
-                                ? "bg-[size:32px_32px]"
-                                : "bg-[size:28px_28px]"
-                            }`}
-                          />
-
-                        </div>
-
-
-                        {/* ================= CARD CONTENT ================= */}
-
-                        <div className="relative z-10 flex h-full flex-col">
+<section className="relative overflow-hidden border-y border-border bg-secondary py-24">
+
+  {/* Background architectural grid */}
+  <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
+    <div
+      className="h-full w-full"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, currentColor 1px, transparent 1px),
+          linear-gradient(to bottom, currentColor 1px, transparent 1px)
+        `,
+        backgroundSize: "55px 55px",
+      }}
+    />
+  </div>
 
-                          {/* ================= HEADER ================= */}
+  <div className="relative">
 
-                          <div className="flex items-start justify-between">
+    {/* ================= HEADING ================= */}
 
-                            <span
-                              className={
-                                isCenter
-                                  ? "text-xs uppercase tracking-[0.25em] text-muted-foreground"
-                                  : "text-[10px] uppercase tracking-[0.2em] text-muted-foreground"
-                              }
-                            >
-                              {position === "left"
-                                ? "Previous"
-                                : position === "center"
-                                  ? "Client Voice"
-                                  : "Up Next"}
-                            </span>
+    <div className="mx-auto mb-14 max-w-[1400px] px-5 sm:px-8">
 
+      <div className="max-w-3xl">
 
-                            <span
-                              className={
-                                isCenter
-                                  ? "font-display text-5xl leading-none text-foreground/10"
-                                  : "font-display text-3xl leading-none text-foreground/10"
-                              }
-                            >
-                              {String(index + 1).padStart(2, "0")}
-                            </span>
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+          Client Stories
+        </p>
 
-                          </div>
+        <h2 className="text-4xl font-medium tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          What our clients{" "}
+          <span className="font-serif italic text-gold">
+            say.
+          </span>
+        </h2>
+
+        <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">
+          From concept to completion, every creation is built with
+          precision, creativity and attention to detail.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* ================= TESTIMONIAL TRAIN ================= */}
+
+    <div className="relative overflow-hidden">
+
+      {/* Left fade */}
+      <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-24 bg-gradient-to-r from-secondary to-transparent md:w-40" />
+
+      {/* Right fade */}
+      <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-24 bg-gradient-to-l from-secondary to-transparent md:w-40" />
+
+
+      {/* TRAIN TRACK */}
+
+      <div className="testimonial-track flex w-max">
+
+        {/* ================= FIRST SET ================= */}
+
+        {testimonials.map((testimonial, index) => (
+
+          <article
+            key={`testimonial-first-${index}`}
+            className="testimonial-card group relative mx-3 w-[320px] shrink-0 md:w-[390px]"
+          >
+
+            <div
+              className="
+                relative
+                min-h-[350px]
+                overflow-hidden
+                border
+                border-border
+                bg-background
+                p-7
+                transition-all
+                duration-500
+                group-hover:-translate-y-1
+                group-hover:border-gold/40
+                group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
+                md:p-8
+              "
+            >
+
+              {/* Card grid */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
+                <div
+                  className="h-full w-full"
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(to right, currentColor 1px, transparent 1px),
+                      linear-gradient(to bottom, currentColor 1px, transparent 1px)
+                    `,
+                    backgroundSize: "28px 28px",
+                  }}
+                />
+              </div>
+
 
+              {/* Top gold line */}
+              <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
-                          {/* ================= QUOTE ================= */}
 
-                          <div
-                            className={
-                              isCenter
-                                ? "relative mt-7 flex flex-1 items-center"
-                                : "relative mt-5 flex-1"
-                            }
-                          >
+              {/* Decorative corner */}
+              <div className="pointer-events-none absolute right-0 top-0 h-20 w-20 overflow-hidden">
+                <div className="absolute right-[-35px] top-[-35px] h-24 w-24 rotate-45 border border-gold/20" />
+              </div>
 
-                            <span
-                              className={
-                                isCenter
-                                  ? "absolute -left-2 top-0 font-serif text-8xl leading-none text-foreground/10"
-                                  : "absolute -left-1 -top-6 font-serif text-6xl leading-none text-foreground/10"
-                              }
-                            >
-                              “
-                            </span>
 
+              {/* Quote mark */}
+              <div className="relative z-10 font-serif text-6xl leading-none text-gold/30">
+                “
+              </div>
 
-                            <p
-                              className={
-                                isCenter
-                                  ? "relative pt-8 font-display text-lg leading-relaxed text-foreground sm:text-xl"
-                                  : "relative pt-5 text-sm leading-relaxed text-foreground"
-                              }
-                            >
-                              {testimonial.quote}
-                            </p>
 
-                          </div>
+              {/* Rating */}
+              <div className="relative z-10 mt-2 flex gap-1">
 
-
-                          {/* ================= PROFILE ================= */}
-
-                          <div
-                            className={
-                              isCenter
-                                ? "border-t border-border pt-5"
-                                : "flex items-center gap-3 border-t border-border pt-4"
-                            }
-                          >
-
-                            {isCenter ? (
-
-                              <div className="flex items-center gap-4">
-
-                                {/* IMAGE */}
-
-                                {testimonial.image ? (
-
-                                  <img
-                                    src={testimonial.image}
-                                    alt={testimonial.name}
-                                    className="h-14 w-14 shrink-0 rounded-full object-cover"
-                                  />
-
-                                ) : (
-
-                                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary font-display text-lg">
-                                    {testimonial.name?.charAt(0)}
-                                  </div>
-
-                                )}
-
-
-                                {/* DETAILS */}
-
-                                <div className="min-w-0">
-
-                                  <p className="truncate font-display text-base font-medium text-foreground">
-                                    {testimonial.name}
-                                  </p>
-
-                                  <p className="truncate text-xs text-muted-foreground">
-                                    {testimonial.company}
-                                  </p>
-
-                                </div>
-
-
-                                {/* PROJECT */}
-
-                                {testimonial.project && (
-
-                                  <span className="ml-auto hidden max-w-[130px] truncate text-right text-[10px] uppercase tracking-wider text-muted-foreground sm:block">
-                                    {testimonial.project}
-                                  </span>
-
-                                )}
-
-                              </div>
-
-                            ) : (
-
-                              <>
-                                {/* SMALL IMAGE */}
-
-                                {testimonial.image ? (
-
-                                  <img
-                                    src={testimonial.image}
-                                    alt={testimonial.name}
-                                    className="h-10 w-10 shrink-0 rounded-full object-cover"
-                                  />
-
-                                ) : (
-
-                                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-sm">
-                                    {testimonial.name?.charAt(0)}
-                                  </div>
-
-                                )}
-
-
-                                {/* SMALL DETAILS */}
-
-                                <div className="min-w-0">
-
-                                  <p className="truncate text-sm font-medium text-foreground">
-                                    {testimonial.name}
-                                  </p>
-
-                                  <p className="truncate text-[10px] text-muted-foreground">
-                                    {testimonial.company}
-                                  </p>
-
-                                </div>
-                              </>
-
-                            )}
-
-                          </div>
-
-                        </div>
-
-                      </motion.div>
-                    );
-                  }
+                {Array.from({ length: testimonial.rating }).map(
+                  (_, starIndex) => (
+                    <span
+                      key={starIndex}
+                      className="text-sm text-gold"
+                    >
+                      ★
+                    </span>
+                  )
                 )}
 
-              </AnimatePresence>
+              </div>
+
+
+              {/* Quote */}
+              <p className="relative z-10 mt-6 text-[15px] leading-7 text-foreground/80">
+                {testimonial.quote}
+              </p>
+
+
+              {/* Client information */}
+              <div className="relative z-10 mt-8 flex items-center gap-4">
+
+                {/* Client image */}
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-border">
+
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="
+                      h-full
+                      w-full
+                      object-cover
+                      transition-transform
+                      duration-700
+                      group-hover:scale-110
+                    "
+                  />
+
+                </div>
+
+
+                {/* Client details */}
+                <div className="min-w-0">
+
+                  <h3 className="truncate text-sm font-semibold text-foreground">
+                    {testimonial.name}
+                  </h3>
+
+                  <p className="mt-1 truncate text-xs uppercase tracking-[0.15em] text-gold">
+                    {testimonial.company}
+                  </p>
+
+                  <p className="mt-1 truncate text-xs text-muted-foreground">
+                    {testimonial.project}
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* Number */}
+              <div className="absolute bottom-5 right-6 text-[10px] tracking-[0.3em] text-muted-foreground/40">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+
+
+              {/* Bottom hover line */}
+              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gold transition-all duration-700 group-hover:w-full" />
 
             </div>
 
+          </article>
 
-            {/* ================================================= */}
-            {/* MOBILE VERSION */}
-            {/* ================================================= */}
+        ))}
 
-            <div className="md:hidden">
 
-              <AnimatePresence mode="wait">
+        {/* ================= SECOND SET ================= */}
 
-                <motion.div
-                  key={activeIndex}
-                  initial={{
-                    opacity: 0,
-                    x: direction === 1 ? 60 : -60,
+        {testimonials.map((testimonial, index) => (
+
+          <article
+            key={`testimonial-second-${index}`}
+            className="testimonial-card group relative mx-3 w-[320px] shrink-0 md:w-[390px]"
+          >
+
+            <div
+              className="
+                relative
+                min-h-[350px]
+                overflow-hidden
+                border
+                border-border
+                bg-background
+                p-7
+                transition-all
+                duration-500
+                group-hover:-translate-y-1
+                group-hover:border-gold/40
+                group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
+                md:p-8
+              "
+            >
+
+              {/* Card grid */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
+                <div
+                  className="h-full w-full"
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(to right, currentColor 1px, transparent 1px),
+                      linear-gradient(to bottom, currentColor 1px, transparent 1px)
+                    `,
+                    backgroundSize: "28px 28px",
                   }}
-                  animate={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    x: direction === 1 ? -60 : 60,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="group relative flex min-h-[380px] flex-col overflow-hidden border border-border bg-background p-6 shadow-lg"
-                >
-
-                  {/* GRID */}
-
-                  <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
-
-                    <div className="h-full w-full bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-[size:28px_28px]" />
-
-                  </div>
+                />
+              </div>
 
 
-                  <div className="relative z-10 flex h-full flex-1 flex-col">
-
-                    {/* HEADER */}
-
-                    <div className="flex items-start justify-between">
-
-                      <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                        Client Voice
-                      </span>
-
-                      <span className="font-display text-4xl text-foreground/10">
-                        {String(activeIndex + 1).padStart(2, "0")}
-                      </span>
-
-                    </div>
+              {/* Top gold line */}
+              <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
 
-                    {/* QUOTE */}
-
-                    <div className="relative mt-8 flex flex-1 items-center">
-
-                      <span className="absolute -left-2 top-0 font-serif text-7xl text-foreground/10">
-                        “
-                      </span>
-
-                      <p className="relative pt-8 font-display text-lg leading-relaxed text-foreground">
-                        {activeTestimonial.quote}
-                      </p>
-
-                    </div>
+              {/* Decorative corner */}
+              <div className="pointer-events-none absolute right-0 top-0 h-20 w-20 overflow-hidden">
+                <div className="absolute right-[-35px] top-[-35px] h-24 w-24 rotate-45 border border-gold/20" />
+              </div>
 
 
-                    {/* PROFILE */}
+              {/* Quote mark */}
+              <div className="relative z-10 font-serif text-6xl leading-none text-gold/30">
+                “
+              </div>
 
-                    <div className="mt-8 border-t border-border pt-5">
 
-                      <div className="flex items-center gap-4">
+              {/* Rating */}
+              <div className="relative z-10 mt-2 flex gap-1">
 
-                        {activeTestimonial.image ? (
+                {Array.from({ length: testimonial.rating }).map(
+                  (_, starIndex) => (
+                    <span
+                      key={starIndex}
+                      className="text-sm text-gold"
+                    >
+                      ★
+                    </span>
+                  )
+                )}
 
-                          <img
-                            src={activeTestimonial.image}
-                            alt={activeTestimonial.name}
-                            className="h-12 w-12 rounded-full object-cover"
-                          />
+              </div>
 
-                        ) : (
 
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
-                            {activeTestimonial.name?.charAt(0)}
-                          </div>
+              {/* Quote */}
+              <p className="relative z-10 mt-6 text-[15px] leading-7 text-foreground/80">
+                {testimonial.quote}
+              </p>
 
-                        )}
 
-                        <div>
+              {/* Client information */}
+              <div className="relative z-10 mt-8 flex items-center gap-4">
 
-                          <p className="font-display text-sm font-medium text-foreground">
-                            {activeTestimonial.name}
-                          </p>
+                {/* Client image */}
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-border">
 
-                          <p className="text-xs text-muted-foreground">
-                            {activeTestimonial.company}
-                          </p>
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="
+                      h-full
+                      w-full
+                      object-cover
+                      transition-transform
+                      duration-700
+                      group-hover:scale-110
+                    "
+                  />
 
-                        </div>
+                </div>
 
-                      </div>
 
-                    </div>
+                {/* Client details */}
+                <div className="min-w-0">
 
-                  </div>
+                  <h3 className="truncate text-sm font-semibold text-foreground">
+                    {testimonial.name}
+                  </h3>
 
-                </motion.div>
+                  <p className="mt-1 truncate text-xs uppercase tracking-[0.15em] text-gold">
+                    {testimonial.company}
+                  </p>
 
-              </AnimatePresence>
+                  <p className="mt-1 truncate text-xs text-muted-foreground">
+                    {testimonial.project}
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* Number */}
+              <div className="absolute bottom-5 right-6 text-[10px] tracking-[0.3em] text-muted-foreground/40">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+
+
+              {/* Bottom hover line */}
+              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gold transition-all duration-700 group-hover:w-full" />
 
             </div>
 
-          </div>
+          </article>
+
+        ))}
+
+      </div>
+
+    </div>
 
 
-          {/* ================= INDICATOR ================= */}
+    {/* ================= BOTTOM LINE ================= */}
 
-          <div className="mt-8 flex justify-center gap-2">
+    <div className="mx-auto mt-10 flex max-w-[1400px] items-center justify-between border-t border-border px-5 pt-5 sm:px-8">
 
-            {testimonials.map((_, index) => (
+      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        Siddhi On Creation
+      </span>
 
-              <button
-                key={index}
-                onClick={() => {
+      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        Client Experiences
+      </span>
 
-                  // Set direction based on where the user is going
-                  setDirection(
-                    index > activeIndex ? 1 : -1
-                  );
+    </div>
 
-                  setActiveIndex(index);
-                }}
-                className={`h-1 transition-all duration-300 ${
-                  index === activeIndex
-                    ? "w-8 bg-foreground"
-                    : "w-4 bg-foreground/20"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
+  </div>
 
-            ))}
-
-          </div>
-
-        </div>
-      </section>
-
+</section>
       {/* CTA */}
       <section className="relative overflow-hidden">
         <img
