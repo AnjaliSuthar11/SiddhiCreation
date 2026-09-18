@@ -15,7 +15,7 @@ import {
   testimonials,
   whyChooseUs,
 } from "@/data/site";
-import { AnimatePresence, motion } from "framer-motion";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({

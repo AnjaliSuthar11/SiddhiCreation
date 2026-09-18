@@ -57,6 +57,8 @@ export function Header() {
           <span className="mt-1 text-[0.6rem] tracking-[0.3em] text-ink-foreground/50 uppercase">
             &amp; {company.sister}
           </span>
+
+          
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
