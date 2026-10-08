@@ -846,16 +846,20 @@ function Index() {
                     />
                   </div>
                   <div className="p-7">
+                    
                     <h3 className="font-display text-2xl text-ink-foreground">
                       {s.title}
                     </h3>
+
                     <p className="mt-3 text-sm leading-relaxed text-ink-foreground/60">
                       {s.short}
                     </p>
+
                     <span className="mt-6 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.2em] text-gold uppercase">
                       Explore <ArrowUpRight className="size-3.5" />
                     </span>
                   </div>
+
                 </Link>
               </Reveal>
             ))}

@@ -30,7 +30,7 @@ export function SectionHeading({
     >
       {eyebrow ? (
         <p className={cn("eyebrow", tone === "dark" && "text-gold-soft/80")}>
-          {eyebrow}
+          {eyebrow} {eyebrow}
         </p>
       ) : null}
       <h2
@@ -39,7 +39,7 @@ export function SectionHeading({
           tone === "dark" ? "text-ink-foreground" : "text-foreground",
         )}
       >
-        {title}
+        {title} {title}
       </h2>
       {intro ? (
         <p
@@ -48,7 +48,7 @@ export function SectionHeading({
             tone === "dark" ? "text-ink-foreground/70" : "text-muted-foreground",
           )}
         >
-          {intro}
+          {intro} {intro}
         </p>
       ) : null}
       {children}
