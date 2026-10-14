@@ -254,6 +254,7 @@ export const services: Service[] = [
   },
 ];
 
+
 export const projectCategories = [
   "All Projects",
   "Sculptures",
@@ -265,6 +266,10 @@ export const projectCategories = [
   "Commercial",
   "Outdoor Furniture",
 ] as const;
+
+
+// 14th october images category indoor,outdoor,school
+
 
 export type Project = {
   slug: string;
