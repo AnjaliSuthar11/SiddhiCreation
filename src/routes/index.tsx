@@ -265,7 +265,7 @@ function Index() {
   <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 pb-20 sm:px-8">
     <Reveal>
       <p className="eyebrow text-gold-soft/80">
-        Since 1994 &nbsp;·&nbsp; Mumbai, India
+        Since 1996 &nbsp;·&nbsp; Mumbai, India
       </p>
 
       <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] text-ink-foreground">
@@ -798,10 +798,10 @@ function Index() {
           eyebrow="Who We Are"
           title={
             <>
-              Three decades of <span className="text-gold">custom creation</span>
+              Three decades of <span className="text-gold">Custom Creation</span>
             </>
           }
-          intro="Siddhi On Creation, together with sister concern Mrudula Creation, designs and manufactures artistic and architectural work for homes, hospitality, offices and townships — from a single sculpture to a full decorative package."
+          intro="Siddhi On Creation is a creative art and design studio specializing in Sculptures, Murals, FRP, GRC, Metal Art, Decorative Grills, Planters, Furniture, Painting and Customized Architectural Artworks.Founded and led by Mr. Shekhar Suresh Satardekar, an artist who has completed his studies at Sir J. J. School of Art, we have been working in the field of art, sculpture and design for over 30 years. "
         >
           <div className="mt-10 space-y-5">
             {whyChooseUs.slice(0, 3).map((w) => (
@@ -976,8 +976,17 @@ function Index() {
       {/* Process */}
       <section className="border-y border-border bg-secondary">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
-          <SectionHeading eyebrow="How We Work" title="Our Process" />
-          <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          <SectionHeading eyebrow="How We Work" title="Our Approach " />
+           <div className="flex flex-col py-10 gap-1">
+              <p className="text-xl leading-relaxed text-muted-foreground">
+                We believe every project is unique.
+              </p>
+              <p className="text-xl leading-relaxed text-muted-foreground">
+                Our process focuses on understanding the client's vision, design intent, site requirements and functional needs before developing the final artwork.
+              </p>
+            </div>
+          <div className=" grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          
             {processSteps.map((s, i) => (
               <Reveal key={s.number} delay={i * 80}>
                 <p className="font-display text-4xl text-gold">{s.number}</p>
@@ -988,7 +997,9 @@ function Index() {
                 </p>
               </Reveal>
             ))}
+
           </div>
+            <p className="pt-10 text-xl leading-relaxed text-muted-foreground">We work collaboratively with Architects, Interior Designers, Landscape Designers, Developers and Project Consultants to achieve the desired design outcome.</p>
         </div>
       </section>
 
