@@ -89,6 +89,7 @@ function GalleryPage() {
             className="absolute top-6 right-6 p-2 text-ink-foreground"
           >
             <X className="size-7" />
+            
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-[88vh]">
             <img
