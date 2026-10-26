@@ -93,7 +93,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "sculptures",
-    title: "Sculptures & Artistic Installations",
+    title: "Sculpture & Artworks",
     short:
       "Custom sculptures designed for residential, commercial and architectural spaces.",
     image: "/service/siddhioncreationwork.png",
@@ -151,7 +151,7 @@ export const services: Service[] = [
   },
   {
     slug: "decorative-gates-grills",
-    title: "Decorative Gates & Grills",
+    title: "Metal & Decorative Work",
     short:
       "Modern, customised decorative gates, grills and architectural metal designs.",
     image:svcGates ,
@@ -204,7 +204,7 @@ export const services: Service[] = [
   },
   {
     slug: "frp-products",
-    title: "FRP Products",
+    title: "FRP Work",
     short: "Durable FRP sculptures, decorative elements and custom products.",
     image:"/service/frp.png",
     overview:
@@ -257,7 +257,7 @@ export const services: Service[] = [
   },
   {
     slug: "architectural-decorative-work",
-    title: "Architectural Decorative Work",
+    title: "Architectural & Decorative Work",
     short:
       "Creative architectural elements in metal, FRP, GRC, wood, stone, tile and more.",
     image:"/work/work8.png" ,
@@ -708,28 +708,64 @@ export const clients = [
     logo: "/client_logo/water_kingdom.jpg",
   },
   {
-    name: "Anan Residency ",
+    name: "Anan Residency, Borivali West",
     logo: "/client_logo/ana_residency.jpg",
   },
   {
-    name: " Shrimad Rajchandra Hospital",
+    name: "Shrimad Rajchandra Hospital, Dharampur, Gujarat ",
     logo: "/client_logo/shrimad_rajchandra_hospital_dharmpur.png",
   },
   {
-    name: "Vishwraj Developers ",
+    name: "Vishwraj Developers, Belgaum",
     logo: "/client_logo/vishwraj_developers.png",
   },
   {
-    name: "White Berry ",
+    name: "White Berry, Kandivali East",
     logo: "/client_logo/white-berry.jpg",
   },
   {
-    name: " Bombay House ",
+    name: "Bombay House",
     logo: "/client_logo/bombay_house.png",
   },
   {
     name: "Manavta Hospital",
     logo: "/client_logo/manavta_hospital.png",
+  },
+  {
+    name: "Rustomjee Builders",
+    logo: "/client_logo/rustomjee.jpeg",
+  },
+  {
+    name: "Ashwin Sheth Group",
+    logo: "/client_logo/ashwinsheth.jpeg",
+  },
+  {
+    name: "Times Square, Andheri",
+    logo: "/client_logo/times_square.jpeg",
+  },
+  {
+    name: "Ascent Meditech, Valsad",
+    logo: "/client_logo/ascent.jpeg",
+  },
+  {
+    name: "7/11 Club & School",
+    logo: "/client_logo/seven_eleven_club_hotels.jpeg",
+  },
+  {
+    name: "Piramal Vaikunth, Thane",
+    logo: "/client_logo/piramal_vaikunth.jpeg",
+  },
+  {
+    name: "Godrej R K Studio",
+    logo: "/client_logo/godrej_rks.jpeg",
+  },
+  {
+    name: "AIIMS Hospital, Jodhpur",
+    logo: "/client_logo/aiims_jodhpur.jpeg",
+  },
+  {
+    name: "Hiranandani",
+    logo: "/client_logo/house_of_hiranandani.jpeg",
   },
 ];
 export const MATERIALS = [
