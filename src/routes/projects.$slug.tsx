@@ -120,6 +120,7 @@ function ProjectDetail() {
           <p className="eyebrow">More Projects</p>
           <div className="mt-10 grid gap-8 sm:grid-cols-3">
             {related.map((p) => (
+              
               <Link
                 key={p.slug}
                 to="/projects/$slug"
