@@ -112,6 +112,7 @@ function ProjectDetail() {
             </Reveal>
           ))}
         </div>
+        
       </section>
 
       <section className="border-t border-border bg-secondary py-24">
