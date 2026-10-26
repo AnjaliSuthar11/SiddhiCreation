@@ -1563,6 +1563,8 @@ function Index() {
 
                 </div>
 
+                
+
 
                 {/* Client details */}
                 <div className="min-w-0">
