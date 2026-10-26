@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {  creationProjects } from "@/data/site";
@@ -126,6 +127,7 @@ function Index() {
         setActiveVideo(null);
         return;
       }
+
 
       // Next
       if (e.key === "ArrowRight") {
@@ -265,7 +267,7 @@ function Index() {
   <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 pb-20 sm:px-8">
     <Reveal>
       <p className="eyebrow text-gold-soft/80">
-        Since 1996 &nbsp;·&nbsp; Mumbai, India
+        Siiiiiince 1996 &nbsp;·&nbsp; Mumbai, India
       </p>
 
       <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] text-ink-foreground">
@@ -821,51 +823,177 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section className="surface-ink">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
-          <SectionHeading
-            eyebrow="What We Create"
-            tone="dark"
-            title="Services"
-            intro="Every discipline we offer is customised — designed around your space, material palette and budget."
-          />
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
+  {/* Services */}
+<section className="surface-ink">
+  <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <SectionHeading
+      eyebrow="What We Create"
+      tone="dark"
+      title="Our Expertise"
+      intro="From bespoke sculptures and artistic murals to FRP creations and architectural detailing, every project is crafted around your vision, materials and space."
+    />
+
+    {(() => {
+      const serviceGroups = [
+        {
+          number: "01",
+          title: "Sculptures & Artistic Installations",
+          slug: "sculptures",
+          image: "/service/siddhioncreationwork.png",
+          description:
+            "FRP, GRC and metal sculptures, landscape art and customised artistic installations.",
+          services: [
+            "FRP Sculptures",
+            "GRC Sculptures",
+            "Metal Sculptures",
+            "Landscape Sculptures",
+            "Thematic & Conceptual Sculptures",
+            "Customized Sculptural Installations",
+          ],
+        },
+        {
+          number: "02",
+          title: "Murals & Wall Art",
+          slug: "murals",
+          image: "/service/wallart.png",
+          description:
+            "Artistic murals, decorative wall panels and bespoke wall installations.",
+          services: [
+            "FRP Murals",
+            "GRC Murals",
+            "Metal Murals",
+            "Decorative Wall Panels",
+            "Thematic Wall Art",
+            "Artistic Installations",
+          ],
+        },
+        {
+          number: "03",
+          title: "FRP Products & Furniture",
+          slug: "frp-products",
+          image: "/service/frp.png",
+          description:
+            "Custom FRP products, planters, furniture and decorative architectural elements.",
+          services: [
+            "FRP Planters & Trays",
+            "Indoor & Outdoor Furniture",
+            "Seating & Benches",
+            "Decorative Gates & Grills",
+            "FRP Platforms & Panels",
+            "Customized FRP Structures",
+          ],
+        },
+        {
+          number: "04",
+          title: "Metal & Decorative Work",
+          slug: "decorative-gates-grills",
+          image: "/work/work8.png",
+          description:
+            "Decorative metalwork, architectural screens and customised metal elements.",
+          services: [
+            "Decorative Metal Grills",
+            "Gates & Screens",
+            "Zalli Work",
+            "Metal Murals",
+            "Metal Sculptures",
+            "Customized Architectural Elements",
+          ],
+        },
+        {
+          number: "05",
+          title: "Architectural & Multi-Material Work",
+          slug: "architectural-decorative-work",
+          image: "/service/cnc_router.png",
+          description:
+            "Bespoke architectural details and decorative work across a variety of materials.",
+          services: [
+            "MDF Carving",
+            "Corian / Solid Surface",
+            "WPC & Wood Work",
+            "Tile Work",
+            "Stone Work",
+            "Customized Architectural Features",
+          ],
+        },
+      ];
+
+      return (
+        <>
+          <div className="mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            {serviceGroups.map((service, i) => (
+              <Reveal key={service.slug} delay={i * 70}>
                 <Link
                   to="/services/$slug"
-                  params={{ slug: s.slug }}
-                  className="group block h-full border border-ink-foreground/10 transition-colors hover:border-gold/50"
+                  params={{ slug: service.slug }}
+                  className="group block h-full border border-ink-foreground/10 transition-colors duration-500 hover:border-gold/60"
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
-                      src={s.image}
-                      alt={s.title}
+                      src={service.image}
+                      alt={service.title}
                       loading="lazy"
                       className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+
+                    <span className="absolute top-5 left-5 border border-white/40 px-3 py-2 text-xs tracking-[0.2em] text-white">
+                      {service.number}
+                    </span>
+
+                    <ArrowUpRight className="absolute right-5 bottom-5 size-6 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
+
+                  {/* Content */}
                   <div className="p-7">
-                    
-                    <h3 className="font-display text-2xl text-ink-foreground">
-                      {s.title}
+                    <h3 className="font-display text-xl leading-snug text-ink-foreground sm:text-2xl">
+                      {service.title}
                     </h3>
 
                     <p className="mt-3 text-sm leading-relaxed text-ink-foreground/60">
-                      {s.short}
+                      {service.description}
                     </p>
 
-                    <span className="mt-6 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.2em] text-gold uppercase">
-                      Explore <ArrowUpRight className="size-3.5" />
+                    {/* Included services */}
+                    <div className="mt-6 space-y-3 border-t border-ink-foreground/10 pt-5">
+                      {service.services.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-start gap-3 text-sm text-ink-foreground/70"
+                        >
+                          <span className="mt-2 size-1 shrink-0 bg-gold" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <span className="mt-7 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.2em] text-gold uppercase">
+                      Explore Services
+                      <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </span>
                   </div>
-
                 </Link>
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+
+          {/* View all services */}
+          <Reveal delay={250}>
+            <div className="mt-12 flex justify-center">
+              <Link to="/services"
+                className="inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-xs tracking-[0.18em] text-ink-foreground uppercase transition-colors hover:bg-gold hover:text-ink"
+              >
+                View All Services
+                <ArrowUpRight className="size-4" />
+              </Link>
+            </div>
+          </Reveal>
+        </>
+      );
+    })()}
+  </div>
+</section>
 
       {/* Featured projects */}
       <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
@@ -1435,6 +1563,8 @@ function Index() {
                   />
 
                 </div>
+
+
 
 
                 {/* Client details */}
