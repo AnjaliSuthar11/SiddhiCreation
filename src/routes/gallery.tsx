@@ -65,9 +65,11 @@ function GalleryPage() {
                 loading="lazy"
                 className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
+
               <span className="mt-5 block text-left text-xs tracking-[0.14em] text-muted-foreground uppercase font-bold">
                 {item.caption}
               </span>
+              
             </button>
           ))}
         </div>
