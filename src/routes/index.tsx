@@ -1,5 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {  creationProjects } from "@/data/site";
@@ -266,7 +265,7 @@ function Index() {
   <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 pb-20 sm:px-8">
     <Reveal>
       <p className="eyebrow text-gold-soft/80">
-        Since 1996 &nbsp;·&nbsp; Mumbai, India
+        Sinceeeee 1994 &nbsp;·&nbsp; Mumbai, India
       </p>
 
       <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] text-ink-foreground">
@@ -502,7 +501,6 @@ function Index() {
           onClick={() => setActiveVideo(0)}
           className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
         >
-
 
           <div className="aspect-[9/16]">
 
@@ -800,10 +798,10 @@ function Index() {
           eyebrow="Who We Are"
           title={
             <>
-              Three decades of <span className="text-gold">Custom Creation</span>
+              Three decades of <span className="text-gold">custom creation</span>
             </>
           }
-          intro="Siddhi On Creation is a creative art and design studio specializing in Sculptures, Murals, FRP, GRC, Metal Art, Decorative Grills, Planters, Furniture, Painting and Customized Architectural Artworks.Founded and led by Mr. Shekhar Suresh Satardekar, an artist who has completed his studies at Sir J. J. School of Art, we have been working in the field of art, sculpture and design for over 30 years. "
+          intro="Siddhi On Creation, together with sister concern Mrudula Creation, designs and manufactures artistic and architectural work for homes, hospitality, offices and townships — from a single sculpture to a full decorative package."
         >
           <div className="mt-10 space-y-5">
             {whyChooseUs.slice(0, 3).map((w) => (
@@ -823,177 +821,51 @@ function Index() {
       </section>
 
       {/* Services */}
-  {/* Services */}
-<section className="surface-ink">
-  <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
-    <SectionHeading
-      eyebrow="What We Create"
-      tone="dark"
-      title="Our Expertise"
-      intro="From bespoke sculptures and artistic murals to FRP creations and architectural detailing, every project is crafted around your vision, materials and space."
-    />
-
-    {(() => {
-      const serviceGroups = [
-        {
-          number: "01",
-          title: "Sculptures & Artistic Installations",
-          slug: "sculptures",
-          image: "/service/siddhioncreationwork.png",
-          description:
-            "FRP, GRC and metal sculptures, landscape art and customised artistic installations.",
-          services: [
-            "FRP Sculptures",
-            "GRC Sculptures",
-            "Metal Sculptures",
-            "Landscape Sculptures",
-            "Thematic & Conceptual Sculptures",
-            "Customized Sculptural Installations",
-          ],
-        },
-        {
-          number: "02",
-          title: "Murals & Wall Art",
-          slug: "murals",
-          image: "/service/wallart.png",
-          description:
-            "Artistic murals, decorative wall panels and bespoke wall installations.",
-          services: [
-            "FRP Murals",
-            "GRC Murals",
-            "Metal Murals",
-            "Decorative Wall Panels",
-            "Thematic Wall Art",
-            "Artistic Installations",
-          ],
-        },
-        {
-          number: "03",
-          title: "FRP Products & Furniture",
-          slug: "frp-products",
-          image: "/service/frp.png",
-          description:
-            "Custom FRP products, planters, furniture and decorative architectural elements.",
-          services: [
-            "FRP Planters & Trays",
-            "Indoor & Outdoor Furniture",
-            "Seating & Benches",
-            "Decorative Gates & Grills",
-            "FRP Platforms & Panels",
-            "Customized FRP Structures",
-          ],
-        },
-        {
-          number: "04",
-          title: "Metal & Decorative Work",
-          slug: "decorative-gates-grills",
-          image: "/work/work8.png",
-          description:
-            "Decorative metalwork, architectural screens and customised metal elements.",
-          services: [
-            "Decorative Metal Grills",
-            "Gates & Screens",
-            "Zalli Work",
-            "Metal Murals",
-            "Metal Sculptures",
-            "Customized Architectural Elements",
-          ],
-        },
-        {
-          number: "05",
-          title: "Architectural & Multi-Material Work",
-          slug: "architectural-decorative-work",
-          image: "/service/cnc_router.png",
-          description:
-            "Bespoke architectural details and decorative work across a variety of materials.",
-          services: [
-            "MDF Carving",
-            "Corian / Solid Surface",
-            "WPC & Wood Work",
-            "Tile Work",
-            "Stone Work",
-            "Customized Architectural Features",
-          ],
-        },
-      ];
-
-      return (
-        <>
-          <div className="mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {serviceGroups.map((service, i) => (
-              <Reveal key={service.slug} delay={i * 70}>
+      <section className="surface-ink">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+          <SectionHeading
+            eyebrow="What We Create"
+            tone="dark"
+            title="Services"
+            intro="Every discipline we offer is customised — designed around your space, material palette and budget."
+          />
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 60}>
                 <Link
                   to="/services/$slug"
-                  params={{ slug: service.slug }}
-                  className="group block h-full border border-ink-foreground/10 transition-colors duration-500 hover:border-gold/60"
+                  params={{ slug: s.slug }}
+                  className="group block h-full border border-ink-foreground/10 transition-colors hover:border-gold/50"
                 >
-                  {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="aspect-[4/3] overflow-hidden">
                     <img
-                      src={service.image}
-                      alt={service.title}
+                      src={s.image}
+                      alt={s.title}
                       loading="lazy"
                       className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
-
-                    <span className="absolute top-5 left-5 border border-white/40 px-3 py-2 text-xs tracking-[0.2em] text-white">
-                      {service.number}
-                    </span>
-
-                    <ArrowUpRight className="absolute right-5 bottom-5 size-6 text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
-
-                  {/* Content */}
                   <div className="p-7">
-                    <h3 className="font-display text-xl leading-snug text-ink-foreground sm:text-2xl">
-                      {service.title}
+                    
+                    <h3 className="font-display text-2xl text-ink-foreground">
+                      {s.title}
                     </h3>
 
                     <p className="mt-3 text-sm leading-relaxed text-ink-foreground/60">
-                      {service.description}
+                      {s.short}
                     </p>
 
-                    {/* Included services */}
-                    <div className="mt-6 space-y-3 border-t border-ink-foreground/10 pt-5">
-                      {service.services.map((item) => (
-                        <div
-                          key={item}
-                          className="flex items-start gap-3 text-sm text-ink-foreground/70"
-                        >
-                          <span className="mt-2 size-1 shrink-0 bg-gold" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <span className="mt-7 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.2em] text-gold uppercase">
-                      Explore Services
-                      <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <span className="mt-6 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.2em] text-gold uppercase">
+                      Explore <ArrowUpRight className="size-3.5" />
                     </span>
                   </div>
+
                 </Link>
               </Reveal>
             ))}
           </div>
-
-          {/* View all services */}
-          <Reveal delay={250}>
-            <div className="mt-12 flex justify-center">
-              <Link to="/services"
-                className="inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-xs tracking-[0.18em] text-ink-foreground uppercase transition-colors hover:bg-gold hover:text-ink"
-              >
-                View All Services
-                <ArrowUpRight className="size-4" />
-              </Link>
-            </div>
-          </Reveal>
-        </>
-      );
-    })()}
-  </div>
-</section>
+        </div>
+      </section>
 
       {/* Featured projects */}
       <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
@@ -1104,17 +976,8 @@ function Index() {
       {/* Process */}
       <section className="border-y border-border bg-secondary">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
-          <SectionHeading eyebrow="How We Work" title="Our Approach " />
-           <div className="flex flex-col py-10 gap-1">
-              <p className="text-xl leading-relaxed text-muted-foreground">
-                We believe every project is unique.
-              </p>
-              <p className="text-xl leading-relaxed text-muted-foreground">
-                Our process focuses on understanding the client's vision, design intent, site requirements and functional needs before developing the final artwork.
-              </p>
-            </div>
-          <div className=" grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
-          
+          <SectionHeading eyebrow="How We Work" title="Our Process" />
+          <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             {processSteps.map((s, i) => (
               <Reveal key={s.number} delay={i * 80}>
                 <p className="font-display text-4xl text-gold">{s.number}</p>
@@ -1125,9 +988,7 @@ function Index() {
                 </p>
               </Reveal>
             ))}
-
           </div>
-            <p className="pt-10 text-xl leading-relaxed text-muted-foreground">We work collaboratively with Architects, Interior Designers, Landscape Designers, Developers and Project Consultants to achieve the desired design outcome.</p>
         </div>
       </section>
 
@@ -1563,8 +1424,6 @@ function Index() {
                   />
 
                 </div>
-
-                
 
 
                 {/* Client details */}

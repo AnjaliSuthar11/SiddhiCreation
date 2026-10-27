@@ -65,12 +65,9 @@ function GalleryPage() {
                 loading="lazy"
                 className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-
-              <span className="mt-5 block text-left text-xs tracking-[0.14em] text-muted-foreground uppercase font-bold">
+              <span className="mt-3 block text-left text-xs tracking-[0.14em] text-muted-foreground uppercase">
                 {item.caption}
               </span>
-              
-              
             </button>
           ))}
         </div>
@@ -83,7 +80,6 @@ function GalleryPage() {
           aria-modal="true"
           onClick={() => setActive(null)}
         >
-          
           <button
             type="button"
             aria-label="Close image"
@@ -91,7 +87,6 @@ function GalleryPage() {
             className="absolute top-6 right-6 p-2 text-ink-foreground"
           >
             <X className="size-7" />
-
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-[88vh]">
             <img

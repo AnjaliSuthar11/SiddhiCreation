@@ -14,7 +14,6 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as ApiContactRouteImport } from './routes/api/contact'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -45,11 +44,6 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiContactRoute = ApiContactRouteImport.update({
-  id: '/api/contact',
-  path: '/api/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -77,7 +71,6 @@ export interface FileRoutesByFullPath {
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
-  '/api/contact': typeof ApiContactRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -89,7 +82,6 @@ export interface FileRoutesByTo {
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
-  '/api/contact': typeof ApiContactRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects': typeof ProjectsIndexRoute
@@ -102,7 +94,6 @@ export interface FileRoutesById {
   '/clients': typeof ClientsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
-  '/api/contact': typeof ApiContactRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -116,7 +107,6 @@ export interface FileRouteTypes {
     | '/clients'
     | '/contact'
     | '/gallery'
-    | '/api/contact'
     | '/projects/$slug'
     | '/services/$slug'
     | '/projects/'
@@ -128,7 +118,6 @@ export interface FileRouteTypes {
     | '/clients'
     | '/contact'
     | '/gallery'
-    | '/api/contact'
     | '/projects/$slug'
     | '/services/$slug'
     | '/projects'
@@ -140,7 +129,6 @@ export interface FileRouteTypes {
     | '/clients'
     | '/contact'
     | '/gallery'
-    | '/api/contact'
     | '/projects/$slug'
     | '/services/$slug'
     | '/projects/'
@@ -153,7 +141,6 @@ export interface RootRouteChildren {
   ClientsRoute: typeof ClientsRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
-  ApiContactRoute: typeof ApiContactRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -197,13 +184,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/contact': {
-      id: '/api/contact'
-      path: '/api/contact'
-      fullPath: '/api/contact'
-      preLoaderRoute: typeof ApiContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -241,7 +221,6 @@ const rootRouteChildren: RootRouteChildren = {
   ClientsRoute: ClientsRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
-  ApiContactRoute: ApiContactRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
