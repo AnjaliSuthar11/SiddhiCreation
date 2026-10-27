@@ -70,6 +70,7 @@ function GalleryPage() {
                 {item.caption}
               </span>
               
+              
             </button>
           ))}
         </div>
