@@ -14,6 +14,23 @@ import texWood from "@/assets/tex-wood.jpg";
 import texCorian from "@/assets/tex-corian.jpg";
 import mural from "@/assets/mural.jpg";
 import cnc from "@/assets/cnc.jpg";
+
+
+// new images school painting
+import painting from "@/assets/painting.jpg"
+import playSchool from "@/assets/play-school.png"
+import playSchool2 from "@/assets/play-school2.png"
+import playSchoolwallpainting from "@/assets/wall-painting8.png";
+import playschoolwallpainting2 from "@/assets/wall-painting9.png"
+import toytrain from "@/assets/toy-train-model.png"
+import wallpainting1 from "@/assets/wall-painting1.jpg";
+import wallpainting2 from "@/assets/wall-painting6.jpg"
+import wallpainting3 from "@/assets/wall-painting7.jpg"
+
+import deermural from "@/assets/deer-mural.jpg"
+import outdoorArt from "@/assets/outdoorArt.jpg"
+import outdoorStoneArt from "@/assets/outdoorStoneArt.png"
+import outdoorShowpiece from "@/assets/outdoorShowPiece.jpg"
 // project
 
 
@@ -28,15 +45,29 @@ export const images = {
   svcPlanters,
   svcArchitectural,
   ctaWorkshop,
+  
+
+  // new images
+  
+painting,
+playSchoolwallpainting,
+playSchool2,
+playschoolwallpainting2,
+toytrain,
+wallpainting2,
+wallpainting1,
+deermural,
+outdoorArt,
+outdoorStoneArt
 };
 
 export const company = {
   name: "Siddhi On Creation",
-  sister: "Mrudula Creation",
-  phone: "+91 98200 00000",
-  phoneHref: "tel:+919820000000",
-  whatsapp: "919820000000",
-  email: "info@siddhioncreation.com",
+  sister: "Mr. Shekhar Suresh Satardekar",
+  phone: "9967066685",
+  phoneHref: "tel:+9967066685",
+  whatsapp: " 9967066685",
+  email: "Siddhi.on.creation@gmail.com",
   address: "Gala NO. 15, Building No.3, Jay Vijay Industry, Western Express Highway, Bapane, Naigaon East, Thane, Maharashtra 401208.",
   hours: "Monday – Saturday, 10:00 – 19:00 IST",
   instagram: "https://instagram.com",
@@ -62,7 +93,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "sculptures",
-    title: "Sculptures & Artistic Installations",
+    title: "Sculpture & Artworks",
     short:
       "Custom sculptures designed for residential, commercial and architectural spaces.",
     image: "/service/siddhioncreationwork.png",
@@ -120,7 +151,7 @@ export const services: Service[] = [
   },
   {
     slug: "decorative-gates-grills",
-    title: "Decorative Gates & Grills",
+    title: "Metal & Decorative Work",
     short:
       "Modern, customised decorative gates, grills and architectural metal designs.",
     image:svcGates ,
@@ -173,7 +204,7 @@ export const services: Service[] = [
   },
   {
     slug: "frp-products",
-    title: "FRP Products",
+    title: "FRP Work",
     short: "Durable FRP sculptures, decorative elements and custom products.",
     image:"/service/frp.png",
     overview:
@@ -226,7 +257,7 @@ export const services: Service[] = [
   },
   {
     slug: "architectural-decorative-work",
-    title: "Architectural Decorative Work",
+    title: "Architectural & Decorative Work",
     short:
       "Creative architectural elements in metal, FRP, GRC, wood, stone, tile and more.",
     image:"/work/work8.png" ,
@@ -265,6 +296,7 @@ export const projectCategories = [
   "Residential",
   "Commercial",
   "Outdoor Furniture",
+  "Wall painting"
 ] as const;
 
 
@@ -392,6 +424,47 @@ export const projects: Project[] = [
       "Clay master, mould making, lay-up, gel-coat finishing, UV-stable PU coating, crane installation.",
     result: "A bold entrance identity with a maintenance cycle of years, not months.",
   },
+   {
+    slug: "play-school",
+    name: "Play School ",
+    category: "Wall Painting",
+    tags: ["Wall painting" ],
+    location: "Bandra Kurla Complex, Mumbai",
+    client: "Corporate headquarters",
+    materials: ["Textured plaster", "Gold leaf", "Pigment"],
+    image:playSchool,
+    gallery: [toytrain,playSchool2,playSchoolwallpainting,playschoolwallpainting2],
+    description:
+      "A 9-metre textured mural in stone tones with restrained gold veining, produced as panels and installed across a double-height reception wall.",
+    challenge:
+      "The client wanted an artwork that felt hand-made but had to be installed in a single weekend shutdown.",
+    approach:
+      "We developed the composition across ten panels so the artwork could be finished in the workshop and dry-fixed on site.",
+    process:
+      "Sample boards, panel build-up, hand-applied plaster layers, gold leafing, sealing and site installation.",
+    result:
+      "A tactile focal wall that has become the company's primary brand backdrop.",
+  },
+  {
+    slug: "deer-murals",
+    name: "Deer Decoration",
+    category: "Murals",
+    tags: ["CNC & MDF", "Commercial"],
+    location: "Thane, Mumbai",
+    client: "Commercial developer",
+    materials: ["MDF", "WPC", "Powder-coated aluminium"],
+    image: deermural,
+    gallery: [svcCnc, svcArchitectural, svcGates],
+    description:
+      "A flowing CNC-carved screen system used across a sales-gallery facade and interior partitions.",
+    challenge:
+      "A continuous pattern had to run across 42 panels with tolerances tight enough to hide every joint.",
+    approach:
+      "Panels were nested from one master file with alignment keys machined into each edge.",
+    process:
+      "Digital pattern development, CNC routing, sanding, lamination and modular installation.",
+    result: "A seamless 30-metre run that reads as one carved surface.",
+  },
   {
     slug: "podium-landscape-planters",
     name: "Podium Landscape Planters",
@@ -439,7 +512,7 @@ export const projects: Project[] = [
     tags: ["Commercial", "FRP Products"],
     location: "Andheri, Mumbai",
     client: "Leading builder group",
-    materials: ["GRC", "Stone", "Metal fins"],
+    materials: ["paint colour"],
     image: "/work/newchess.png",
     gallery: [svcArchitectural, svcCnc, svcFrp],
     description:
@@ -451,6 +524,67 @@ export const projects: Project[] = [
     process:
       "Shop drawings, mould library, casting, finishing, sequenced deliveries and phased installation.",
     result: "All three towers handed over on schedule with a unified architectural identity.",
+  },
+  {
+    slug: "stone-art",
+    name: "Stone Art",
+    category: "Outdoor Furniture",
+    tags: ["CNC & MDF", "Commercial"],
+    location: "Thane, Mumbai",
+    client: "Commercial developer",
+    materials: ["MDF", "WPC", "Powder-coated aluminium"],
+    image: outdoorArt,
+    gallery: [ outdoorArt, outdoorStoneArt,deermural],
+    description:
+      "A flowing CNC-carved screen system used across a sales-gallery facade and interior partitions.",
+    challenge:
+      "A continuous pattern had to run across 42 panels with tolerances tight enough to hide every joint.",
+    approach:
+      "Panels were nested from one master file with alignment keys machined into each edge.",
+    process:
+      "Digital pattern development, CNC routing, sanding, lamination and modular installation.",
+    result: "A seamless 30-metre run that reads as one carved surface.",
+  },
+  {
+    slug: "showpiece",
+    name: "unique show piece",
+    category: "Outdoor Furniture",
+    tags: ["CNC & MDF", "Commercial"],
+    location: "Thane, Mumbai",
+    client: "Commercial developer",
+    materials: ["MDF", "WPC", "Powder-coated aluminium"],
+    image: outdoorShowpiece,
+    gallery: [ outdoorShowpiece,outdoorArt, outdoorStoneArt,deermural],
+    description:
+      "A flowing CNC-carved screen system used across a sales-gallery facade and interior partitions.",
+    challenge:
+      "A continuous pattern had to run across 42 panels with tolerances tight enough to hide every joint.",
+    approach:
+      "Panels were nested from one master file with alignment keys machined into each edge.",
+    process:
+      "Digital pattern development, CNC routing, sanding, lamination and modular installation.",
+    result: "A seamless 30-metre run that reads as one carved surface.",
+  },
+  {
+    slug: "wall-painting",
+    name: "wall painting",
+    category: "Wall painting",
+    tags: ["Wall painting"],
+    location: "Lower Parel, Mumbai",
+    client: "xyz school in mumbai",
+    materials: ["Stainless steel", "Brushed bronze finish"],
+    image: painting,
+    gallery: [wallpainting1,wallpainting2,wallpainting3],
+    description:
+      "A 6.5-metre ribbon sculpture suspended over a hotel atrium, engineered in brushed metal to catch the building's warm accent lighting.",
+    challenge:
+      "The form needed continuous curvature with no visible seams, installed inside a live hotel without scaffolding the full atrium.",
+    approach:
+      "The surface was split into eleven pre-finished segments with concealed internal splines, allowing assembly in place.",
+    process:
+      "Full-scale mock-up, CNC-formed segments, hand polishing, structural load testing, then a four-night installation window.",
+    result:
+      "A landmark centrepiece delivered without a single day of guest disruption.",
   },
 ];
 
@@ -506,27 +640,32 @@ export const creationProjects: CreationProject[] = [
 export const processSteps = [
   {
     number: "01",
-    title: "Consultation",
+    title: "Concept",
     text: "Understanding the client's vision, requirements and project goals.",
   },
   {
     number: "02",
-    title: "Design & Concept",
+    title: "Design",
     text: "Creating customised concepts and design solutions.",
   },
   {
     number: "03",
-    title: "Material Selection",
+    title: "3D Development",
     text: "Selecting the right materials for the design, durability and site conditions.",
   },
   {
     number: "04",
-    title: "Manufacturing",
+    title: "Fabrication ",
     text: "Our skilled craftsmen and workshop team turn the concept into reality.",
   },
   {
     number: "05",
-    title: "Installation",
+    title: "Finishing ",
+    text: "Professional execution.",
+  },
+  {
+    number: "06",
+    title: "Installation ",
     text: "Professional execution, delivery and installation of the finished work.",
   },
 ];
@@ -569,28 +708,64 @@ export const clients = [
     logo: "/client_logo/water_kingdom.jpg",
   },
   {
-    name: "Anan Residency ",
+    name: "Anan Residency, Borivali West",
     logo: "/client_logo/ana_residency.jpg",
   },
   {
-    name: " Shrimad Rajchandra Hospital",
+    name: "Shrimad Rajchandra Hospital, Dharampur, Gujarat ",
     logo: "/client_logo/shrimad_rajchandra_hospital_dharmpur.png",
   },
   {
-    name: "Vishwraj Developers ",
+    name: "Vishwraj Developers, Belgaum",
     logo: "/client_logo/vishwraj_developers.png",
   },
   {
-    name: "White Berry ",
+    name: "White Berry, Kandivali East",
     logo: "/client_logo/white-berry.jpg",
   },
   {
-    name: " Bombay House ",
+    name: "Bombay House",
     logo: "/client_logo/bombay_house.png",
   },
   {
     name: "Manavta Hospital",
     logo: "/client_logo/manavta_hospital.png",
+  },
+  {
+    name: "Rustomjee Builders",
+    logo: "/client_logo/rustomjee.jpeg",
+  },
+  {
+    name: "Ashwin Sheth Group",
+    logo: "/client_logo/ashwinsheth.jpeg",
+  },
+  {
+    name: "Times Square, Andheri",
+    logo: "/client_logo/times_square.jpeg",
+  },
+  {
+    name: "Ascent Meditech, Valsad",
+    logo: "/client_logo/ascent.jpeg",
+  },
+  {
+    name: "7/11 Club & School",
+    logo: "/client_logo/seven_eleven_club_hotels.jpeg",
+  },
+  {
+    name: "Piramal Vaikunth, Thane",
+    logo: "/client_logo/piramal_vaikunth.jpeg",
+  },
+  {
+    name: "Godrej R K Studio",
+    logo: "/client_logo/godrej_rks.jpeg",
+  },
+  {
+    name: "AIIMS Hospital, Jodhpur",
+    logo: "/client_logo/aiims_jodhpur.jpeg",
+  },
+  {
+    name: "Hiranandani",
+    logo: "/client_logo/house_of_hiranandani.jpeg",
   },
 ];
 export const MATERIALS = [
@@ -691,26 +866,26 @@ export const testimonials = [
 export const whyChooseUs = [
   {
     title: "30+ Years of Experience",
-    text: "Decades of expertise in artistic and architectural creations.",
+    text: "Decades of experience in art, sculpture, fabrication and customized design",
   },
   {
-    title: "Customised Solutions",
-    text: "Every project is designed around the client's specific requirement.",
+    title: "Creative & Technical Expertise",
+    text: "A strong combination of artistic creativity and technical execution.",
   },
   {
-    title: "Skilled Craftsmanship",
-    text: "A team focused on creativity, precision and finish quality.",
+    title: "Multi-Material Capability",
+    text: "Expertise across FRP, GRC, Metal, Wood, MDF, Corian, WPC, Tiles and Stone.",
   },
   {
-    title: "Multiple Materials",
-    text: "Metal, FRP, GRC, wood, stone, MDF and solid surface under one roof.",
+    title: "Customized Solutions",
+    text: "Every project is developed according to the client's design, dimensions and requirements.",
   },
   {
     title: "End-to-End Execution",
-    text: "Concept and design through manufacturing and installation.",
+    text: "From concept development and design to fabrication, finishing and installation.",
   },
   {
-    title: "Residential & Commercial",
-    text: "Projects delivered across homes, hospitality, offices and townships.",
+    title: "Quality & Commitment",
+    text: "We are committed to delivering quality workmanship and completing projects within the agreed timeframe.",
   },
 ];

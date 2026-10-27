@@ -11,8 +11,9 @@ export function FloatingActions() {
         className="grid size-12 place-items-center rounded-full bg-ink/90 text-ink-foreground shadow-elegant backdrop-blur transition-transform hover:scale-105 sm:hidden"
       >
         <Phone className="size-5" />
+   
       </a>
-      <a
+      {/* <a
         href={whatsappLink()}
         target="_blank"
         rel="noreferrer noopener"
@@ -23,7 +24,7 @@ export function FloatingActions() {
         <span className="hidden text-[0.72rem] tracking-[0.18em] uppercase sm:inline">
           Discuss Your Project
         </span>
-      </a>
+      </a> */}
     </div>
   );
 }
