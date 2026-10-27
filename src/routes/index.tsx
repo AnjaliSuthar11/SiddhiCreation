@@ -502,6 +502,7 @@ function Index() {
           onClick={() => setActiveVideo(0)}
           className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
         >
+          
 
           <div className="aspect-[9/16]">
 
