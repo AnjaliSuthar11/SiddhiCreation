@@ -263,6 +263,8 @@ function Index() {
   {/* Dark overlay for text visibility */}
   <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/30" />
 
+
+
   <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 pb-20 sm:px-8">
     <Reveal>
       <p className="eyebrow text-gold-soft/80">
