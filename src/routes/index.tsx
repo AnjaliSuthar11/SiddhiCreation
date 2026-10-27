@@ -266,7 +266,7 @@ function Index() {
   <div className="relative mx-auto w-full max-w-[1400px] px-5 pt-32 pb-20 sm:px-8">
     <Reveal>
       <p className="eyebrow text-gold-soft/80">
-        Sinceeeeeee 1996 &nbsp;·&nbsp; Mumbai, India
+        hello 1996 &nbsp;·&nbsp; Mumbai, India
       </p>
 
       <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] text-ink-foreground">
@@ -502,7 +502,7 @@ function Index() {
           onClick={() => setActiveVideo(0)}
           className="group relative cursor-pointer overflow-hidden bg-[#241c16]"
         >
-          
+
 
           <div className="aspect-[9/16]">
 
