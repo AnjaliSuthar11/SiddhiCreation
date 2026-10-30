@@ -140,6 +140,7 @@ function ClientsPage() {
               >
                 {/* Background Glow */}
 
+
                 <div
                   className="
                     absolute inset-0 opacity-0 transition-opacity duration-300

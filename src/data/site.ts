@@ -32,7 +32,7 @@ import outdoorArt from "@/assets/outdoorArt.jpg"
 import outdoorStoneArt from "@/assets/outdoorStoneArt.png"
 import outdoorShowpiece from "@/assets/outdoorShowPiece.jpg"
 // project
-
+import bgaboutpage from "@/assets/About-us-banner.png"
 
 export const images = {
   heroInstallation,
@@ -46,7 +46,7 @@ export const images = {
   svcArchitectural,
   ctaWorkshop,
   
-
+bgaboutpage,
   // new images
   
 painting,

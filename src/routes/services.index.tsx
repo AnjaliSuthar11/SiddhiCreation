@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { materials } from "@/data/site";
+import { images, materials } from "@/data/site";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -120,51 +120,57 @@ function ServicesPage() {
   return (
     <div>
       {/* HERO SECTION */}
-      <section className="surface-ink relative overflow-hidden pt-36 pb-24">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, currentColor 1px, transparent 1px),
-                linear-gradient(to bottom, currentColor 1px, transparent 1px)
-              `,
-              backgroundSize: "80px 80px",
-            }}
-          />
-        </div>
 
-        <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
-          <Reveal>
-            <p className="eyebrow text-gold-soft/80">
-              Our Services
-            </p>
+{/* HERO SECTION */}
+<section className="relative isolate min-h-[600px] overflow-hidden bg-[#211D19] pt-36 pb-24">
 
-            <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.02] text-ink-foreground">
-              Crafting art.
-              <br />
-              <span className="text-gold">
-                Shaping spaces.
-              </span>
-            </h1>
+  {/* Background Image */}
+  <img
+    src="About-us-banner-1.jpg"
+    alt="image"
+    aria-hidden="true"
+    className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+  />
 
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-foreground/70 md:text-lg">
-              From bespoke sculptures and artistic murals to FRP
-              creations, decorative metalwork and architectural
-              detailing, we transform ideas into distinctive
-              creations through craftsmanship and material expertise.
-            </p>
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 z-[1] bg-black/45" />
 
-            <a
-              href="#service-categories"
-              className="mt-10 inline-flex items-center gap-3 border border-gold/50 px-7 py-4 text-xs tracking-[0.18em] text-ink-foreground uppercase transition-colors hover:bg-gold hover:text-ink"
-            >
-              Explore Our Expertise
-              <ArrowRight className="size-4" />
-            </a>
-          </Reveal>
-        </div>
-      </section>
+  {/* Gradient Overlay */}
+  <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
+
+  {/* Content */}
+  <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8">
+    <Reveal>
+      <p className="eyebrow text-gold-soft/80">
+        Our Services
+      </p>
+
+      <h1 className="mt-6 max-w-4xl text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.02] text-ink-foreground">
+        Crafting art.
+        <br />
+        <span className="text-gold">
+          Shaping spaces.
+        </span>
+      </h1>
+
+      <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-foreground/80 md:text-lg">
+        From bespoke sculptures and artistic murals to FRP
+        creations, decorative metalwork and architectural
+        detailing, we transform ideas into distinctive
+        creations through craftsmanship and material expertise.
+      </p>
+
+      <a
+        href="#service-categories"
+        className="mt-10 inline-flex items-center gap-3 border border-gold/50 px-7 py-4 text-xs tracking-[0.18em] text-ink-foreground uppercase transition-colors hover:bg-gold hover:text-ink"
+      >
+        Explore Our Expertise
+        <ArrowRight className="size-4" />
+      </a>
+    </Reveal>
+  </div>
+</section>
+
 
       {/* SERVICE CATEGORIES */}
       <section
